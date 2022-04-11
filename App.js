@@ -1,23 +1,22 @@
-import React, { useState } from 'react'
+import React, {useState} from 'react';
 
-import { SafeAreaView, View, Text, StyleSheet, TextInput } from 'react-native'
+import {SafeAreaView, View, Text, StyleSheet, TextInput} from 'react-native';
 
 export const App = () => {
+  const [nameText, setNameText] = useState('');
 
-  const [nameText, setNameText] = useState('')
+  const textUpdate = text => {
+    console.log('val: ', text);
 
-  const textUpdate = (text) => {
-    console.log('val: ', text)
-
-    setNameText(text)
-  }
+    setNameText(text);
+  };
 
   return (
     <SafeAreaView style={styles.mainContainer}>
       <View style={styles.container}>
         <Text style={styles.title}>My name is: {nameText}</Text>
 
-        <TextInput 
+        <TextInput
           onChangeText={textUpdate}
           style={styles.input}
           value={nameText}
@@ -44,5 +43,5 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 30,
     color: '#4d4d4d',
-  }
+  },
 });
