@@ -1,8 +1,11 @@
 import React, {useState} from 'react';
-import {SafeAreaView, View, Text, StyleSheet, TextInput} from 'react-native';
+import {SafeAreaView, View, Text, StyleSheet, TextInput, Button} from 'react-native';
 import {formInputStyle, textInputStyle} from '../styles';
+import { useNavigation } from '@react-navigation/native';
 
 export const LandingPage = () => {
+
+  const navigation = useNavigation();
 
   const [nameText, setNameText] = useState('');
   const [ageText, setAgeText] = useState();
@@ -34,6 +37,11 @@ export const LandingPage = () => {
           onChangeText={updateAge}
           style={formInputStyle.input}
           value={ageText}
+        />
+
+        <Button 
+          title='Goto Next page'
+          onPress={() => navigation.navigate('Next Page')}
         />
       </View>
     </SafeAreaView>
