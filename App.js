@@ -4,11 +4,16 @@ import {SafeAreaView, View, Text, StyleSheet, TextInput} from 'react-native';
 
 export const App = () => {
   const [nameText, setNameText] = useState('');
+  const [ageText, setAgeText] = useState();
 
   const textUpdate = text => {
-    console.log('val: ', text);
-
     setNameText(text);
+  };
+
+  const updateAge = text => {
+    // Do integer validation
+    // only insert the value to setAgeText if the text is integer
+    setAgeText(text);
   };
 
   return (
@@ -20,6 +25,14 @@ export const App = () => {
           onChangeText={textUpdate}
           style={styles.input}
           value={nameText}
+        />
+
+        <Text style={styles.title}>My Age is: {ageText}</Text>
+
+        <TextInput
+          onChangeText={updateAge}
+          style={styles.input}
+          value={ageText}
         />
       </View>
     </SafeAreaView>
