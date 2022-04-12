@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {SafeAreaView, View, Text, StyleSheet, TextInput} from 'react-native';
-import {formInputStyle} from '../styles/formInputStyle'
+import {formInputStyle, textInputStyle} from '../styles';
 
 export const LandingPage = () => {
 
@@ -20,7 +20,7 @@ export const LandingPage = () => {
   return (
     <SafeAreaView style={styles.mainContainer}>
       <View style={styles.container}>
-        <Text style={styles.title}>My name is: {nameText}</Text>
+        <Text style={textInputStyle.title}>My name is: {nameText}</Text>
 
         <TextInput
           onChangeText={textUpdate}
@@ -28,7 +28,7 @@ export const LandingPage = () => {
           value={nameText}
         />
 
-        <Text style={styles.title}>My Age is: {ageText}</Text>
+        <Text style={textInputStyle.title2}>My Age is: {ageText}</Text>
 
         <TextInput
           onChangeText={updateAge}
@@ -47,9 +47,5 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 10,
-  },
-  title: {
-    fontSize: 30,
-    color: '#4d4d4d',
   },
 });
