@@ -1,3 +1,4 @@
+import android.os.Bundle;
 package com.awesomeproject;
 
 import com.facebook.react.ReactActivity;
@@ -36,5 +37,10 @@ public class MainActivity extends ReactActivity {
       reactRootView.setIsFabric(BuildConfig.IS_NEW_ARCHITECTURE_ENABLED);
       return reactRootView;
     }
+  }
+
+  @Override
+  protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(null);
   }
 }
