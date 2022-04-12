@@ -10,5 +10,9 @@ export const textInputStyle = StyleSheet.create({
   title2: {
     ...defaultTitle,
     color: 'blue',
+  },
+  primaryName: {
+    fontSize: 32,
+    color: 'lightblue',
   }
 });
