@@ -1,18 +1,20 @@
 import {StyleSheet} from 'react-native';
+import { COLORS } from '../constans/COLORS'
+import { FONT_SIZE } from '../constans/FONT_SIZE';
 
 const defaultTitle = {
-  fontSize: 30,
-  color: '#4d4d4d',
+  fontSize: FONT_SIZE.XXL,
+  color: COLORS.PRIMARY,
 };
 
 export const textInputStyle = StyleSheet.create({
   title: defaultTitle,
   title2: {
     ...defaultTitle,
-    color: 'blue',
+    color: COLORS.SECONDARY,
   },
   primaryName: {
     fontSize: 32,
-    color: 'lightblue',
+    color: COLORS.SECONDARY,
   }
 });

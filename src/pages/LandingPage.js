@@ -1,17 +1,14 @@
 import React, {useState} from 'react';
-import {
-  SafeAreaView,
-  View,
-  Text,
-  StyleSheet,
-  TextInput,
-  Button,
-} from 'react-native';
+import {SafeAreaView, View, StyleSheet, Button} from 'react-native';
 import {formInputStyle, textInputStyle} from '../styles';
 import {useNavigation} from '@react-navigation/native';
+import {Title, StyledTextInput} from '../styles/textStyleComponent';
+import { useTheme } from 'styled-components'
 
 export const LandingPage = () => {
   const navigation = useNavigation();
+
+  const theme = useTheme()
 
   const [nameText, setNameText] = useState('');
   const [ageText, setAgeText] = useState();
@@ -26,24 +23,18 @@ export const LandingPage = () => {
     setAgeText(text);
   };
 
+
+
   return (
     <SafeAreaView style={styles.mainContainer}>
       <View style={styles.container}>
-        <Text style={textInputStyle.title}>My name is: {nameText}</Text>
+        <Title>My name is: {nameText}</Title>
 
-        <TextInput
-          onChangeText={textUpdate}
-          style={formInputStyle.input}
-          value={nameText}
-        />
+        <StyledTextInput onChangeText={textUpdate} value={nameText} />
 
-        <Text style={textInputStyle.title2}>My Age is: {ageText}</Text>
+        <Title>My Age is: {ageText}</Title>
 
-        <TextInput
-          onChangeText={updateAge}
-          style={formInputStyle.input}
-          value={ageText}
-        />
+        <StyledTextInput onChangeText={updateAge} value={ageText} />
 
         <Button
           title="Goto Next page"
