@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   View,
   Text,
@@ -9,8 +9,18 @@ import {
   Alert,
 } from 'react-native';
 import axios from 'axios';
+import {useSelector, useDispatch} from 'react-redux';
+import {setBahasa, setEnglish} from '../../redux/settingsSlice';
+import { setListState } from '../../redux/itemsSlice';
+import { useNavigation } from '@react-navigation/native';
 
 export const AddItem = () => {
+  const navigate = useNavigation()
+  const settingsState = useSelector(state => state.settings);
+
+  const {language} = settingsState;
+
+  const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState(false);
 
   const [addForm, setAddForm] = useState({
@@ -53,7 +63,7 @@ export const AddItem = () => {
 
         setTimeout(() => {
           setIsLoading(false);
-        }, 2000)
+        }, 2000);
 
         Alert.alert('Success', 'Submission is success', [
           {
@@ -73,16 +83,40 @@ export const AddItem = () => {
       });
   };
 
-  return (
-    isLoading ? 
+  const callGetListAPI = () => {
+    axios
+      .get('https://dev-msid.posdigicert.com.my/APIEX/test_get_all_data/1', {
+        headers: {
+          Token: 'Basic a3JpZGVudGlhOlBhc3N3MHJkMjAxOQ==',
+        },
+      })
+      .then(res => {
+        dispatch(setListState(res.data.data));
+
+        setTimeout(() => {
+          setIsLoading(false);
+        }, 2000);
+      })
+      .catch(err => {
+        console.log('err: ', err);
+        setIsLoading(false);
+      });
+  };
+
+  useEffect(() => {
+    // Func here
+    callGetListAPI()
+  }, [])
+
+  return isLoading ? (
     <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
       <ActivityIndicator size="large" />
       <Text>Submiting your form...</Text>
     </View>
-  : 
+  ) : (
     <View style={{padding: 15, backgroundColor: 'white', flex: 1}}>
       {/* First name */}
-      <Text style={{marginBottom: 8}}>First Name</Text>
+      <Text style={{marginBottom: 8}}>{language.firstName}</Text>
       <TextInput
         value={addForm.first_name}
         placeholder="Enter First Name..."
@@ -91,7 +125,7 @@ export const AddItem = () => {
       />
 
       {/* Last Name */}
-      <Text style={{marginBottom: 8, marginTop: 20}}>Last Name</Text>
+      <Text style={{marginBottom: 8, marginTop: 20}}>{language.lastName}</Text>
       <TextInput
         value={addForm.last_name}
         placeholder="Enter Last Name..."
@@ -100,7 +134,7 @@ export const AddItem = () => {
       />
 
       {/* Email */}
-      <Text style={{marginBottom: 8, marginTop: 20}}>Email</Text>
+      <Text style={{marginBottom: 8, marginTop: 20}}>{language.email}</Text>
       <TextInput
         value={addForm.email_value}
         placeholder="Enter Email..."
@@ -119,6 +153,45 @@ export const AddItem = () => {
         }}
         onPress={addItemApi}>
         <Text>Submit</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity
+        // eslint-disable-next-line react-native/no-inline-styles
+        style={{
+          backgroundColor: 'lightgrey',
+          marginTop: 20,
+          alignItems: 'center',
+          padding: 10,
+          borderRadius: 5,
+        }}
+        onPress={() => dispatch(setBahasa())}>
+        <Text>Change to Bahasa</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity
+        // eslint-disable-next-line react-native/no-inline-styles
+        style={{
+          backgroundColor: 'lightgrey',
+          marginTop: 20,
+          alignItems: 'center',
+          padding: 10,
+          borderRadius: 5,
+        }}
+        onPress={() => dispatch(setEnglish())}>
+        <Text>Change to English</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity
+        // eslint-disable-next-line react-native/no-inline-styles
+        style={{
+          backgroundColor: 'lightgrey',
+          marginTop: 20,
+          alignItems: 'center',
+          padding: 10,
+          borderRadius: 5,
+        }}
+        onPress={() => navigate.navigate('Item List')}>
+        <Text>Goto List</Text>
       </TouchableOpacity>
     </View>
   );
