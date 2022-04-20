@@ -9,7 +9,8 @@ export const Title = styled.Text`
 export const StyledTextInput = styled.TextInput`
   font-size: 30px;
   padding: 10px;
-  margin: 12px;
+  margin-bottom: 30px;
+  margin-top: 15px;
   border-width: 1px;
   border-radius: 5px;
   border-color: #4d4d4d;

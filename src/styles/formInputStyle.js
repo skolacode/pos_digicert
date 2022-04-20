@@ -7,4 +7,10 @@ export const formInputStyle = StyleSheet.create({
     borderWidth: 1,
     padding: 10,
   },
+  addBtn: {
+    backgroundColor: 'lightgrey',
+    alignItems: 'center',
+    padding: 10,
+    borderRadius: 5,
+  }
 });
