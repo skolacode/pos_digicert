@@ -12,7 +12,7 @@ import {
 import axios from 'axios';
 import {useSelector, useDispatch} from 'react-redux';
 import {setBahasa, setEnglish} from '../../redux/settingsSlice';
-import {setListState} from '../../redux/itemsSlice';
+import {deleteItem, setListState, updateItem} from '../../redux/itemsSlice';
 import {useNavigation, useRoute} from '@react-navigation/native';
 
 export const EditItem = () => {
@@ -70,9 +70,12 @@ export const EditItem = () => {
           setIsLoading(false);
         }, 2000);
 
+        dispatch(updateItem(itemDetails))
+
         Alert.alert('Success', 'Submission is success', [
           {
             text: 'OK',
+            onPress: () => navigate.goBack()
           },
         ]);
       })
@@ -106,6 +109,8 @@ export const EditItem = () => {
         // x = 2 > res.data
         // x = {2} {res.data}
         // x = 2 > {...res.data}
+
+        dispatch(deleteItem(idx));
 
         Alert.alert('Success', 'Delete Success', [
           {
