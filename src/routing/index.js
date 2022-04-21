@@ -5,6 +5,7 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {LandingPage} from '../pages/LandingPage';
 import {AddItem} from '../pages/apiPage/AddItem';
+import {EditItem} from '../pages/apiPage/EditItem';
 import {ListingPage} from '../pages/apiPage/ListingPage';
 import {NextPage} from '../pages/NextPage';
 import {ThemeProvider} from 'styled-components';
@@ -26,9 +27,10 @@ export const Routing = () => {
     <ThemeProvider theme={currentTheme}>
         <Provider store={store}>
         <NavigationContainer>
-          <StackPublic.Navigator>
+          <StackPublic.Navigator initialRouteName='Add Item'>
             <StackPublic.Screen name="Add Item" component={AddItem} />
             <StackPublic.Screen name="Item List" component={ListingPage} />
+            <StackPublic.Screen name="Edit Item" component={EditItem} />
             <StackPublic.Screen name="Home" component={LandingPage} />
             <StackPublic.Screen name="Next Page" component={NextPage} />
           </StackPublic.Navigator>
